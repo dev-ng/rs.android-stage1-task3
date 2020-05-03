@@ -23,8 +23,8 @@ class FullBinaryTrees {
                 node = node.parent
             }
             result += arrayOf("[" + row.joinToString(",") + "]")
-            result.forEach { println(it) }
         }
+        //result.forEach { println(it) }
         return "[" + result.joinToString(" ") + "]"
     }
 
@@ -47,15 +47,17 @@ class FullBinaryTrees {
                     if(1 < result[j*2].count) {
                         result[j*2].value += arrayOf("0","0")
                         result[j*2].count -= 2
+                        result[j*2 + 1].value += arrayOf("null","null")
                     }
-                    result[j*2 + 1].value += arrayOf("null","null")
                 }
             }
         }
         var withChildren: Array<Row> = arrayOf()
         for(r in result) {
             if(2 > r.count) {
-                withChildren += r
+                if(r.value.size > 0) {
+                    withChildren += r
+                }
             } else {
                 withChildren += getChildren(r)
             }
@@ -68,7 +70,11 @@ class FullBinaryTrees {
         var newArray: Array<Row> = arrayOf()
         for(row in rowArray) {
             newArray += row
-            newArray += Row(row.count, row.parent, row.value)
+            if(0 == row.count) {
+                newArray += Row(row.count, row.parent, arrayOf())
+            } else {
+                newArray += Row(row.count, row.parent, row.value)
+            }
         }
         return newArray
     }
