@@ -33,7 +33,7 @@ class FullBinaryTrees {
         if( 0 == count ) {
             return arrayOf(Row(0, parent, arrayOf()))
         }
-        val row = parent.value //value //value.split(",").toTypedArray()
+        val row = parent.value
         val size = row.size - 1
         var result: Array<Row> = arrayOf()
         for(i in 0..size) {
